@@ -33,5 +33,13 @@ app.get('/list-category', async(req,res)=>{
 
 })
 
+//delete api
+
+app.delete("/delete/:_id", async(req,res)=>{
+   // console.log(req.params)
+    let categorylist = await category.deleteOne(req.params)
+    res.send(categorylist)
+})
+
 
 app.listen(5000);
