@@ -256,24 +256,34 @@
                                 <button type="button" class="btn-close" data-bs-dismiss="modal"
                                     aria-label="Close"></button>
                             </div>
+
+                             <!-- form start -->
+                              <form id="form" method="post">
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col mb-3">
                                         <label for="nameWithTitle" class="form-label">Category</label>
-                                        <input type="text" id="nameWithTitle" class="form-control"
+                                        <input type="text" id="category" class="form-control"
                                             placeholder="Enter Categories" />
                                     </div>
                                 </div>
+
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                         Close
                                     </button>
-                                    <button type="button" class="btn btn-primary">Add Category</button>
+                                    <!-- <button type="button" class="btn btn-primary">Add Category</button> -->
+                                    <input type="submit" value="Add Category" class="btn btn-primary"/>
                                 </div>
+
                             </div>
+                        </form>
+                            <!-- end form -->
                         </div>
                     </div>
                 </div>
+
+
 
 
 
@@ -411,13 +421,17 @@
             console.log(result, "my output")
             document.getElementById("category-list").innerHTML = result.map((category, index) =>
                 `<tr>
-                <td>${index + 1} </td>
+                <td>${category._id} </td>
                 <td>${category.category}</td> 
                 <td>
                 <a href="" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                data-bs-target="#modalEdit">Edit</a> &nbsp; <a href=""
-                class="btn btn-danger btn-sm" data-bs-toggle="modal"
-              data-bs-target="#modalDelete">Delete</a>
+                data-bs-target="#modalEdit">Edit</a> &nbsp;
+                 <a href=""
+               class="btn btn-danger btn-sm" data-bs-toggle="modal"
+             data-bs-target="#modalDelete">Delete item</a>
+             <button onclick='removeitem(${category._id})'> Dlete</button>
+
+             
             </td>
                 
             </tr>`
@@ -428,6 +442,48 @@
         }
 
         callapi()
+
+
+
+        //post api
+
+    let form = document.getElementById('form')
+    form.addEventListener('submit',function(e){
+        e.preventDefault()
+
+        let category = document.getElementById('category').value
+
+        fetch("http://localhost:5000/add-category",{
+            method:'POST',
+            body:JSON.stringify({
+                category:category
+            }),
+            headers:{
+                "Content-Type":"appication/json; charset=UTF-8"
+            }
+        }).then(function(responce){
+        
+            return responce.json()
+            alert("ggg")
+        }).then(function(data){
+            console.log(data, "post data")
+            
+        })
+        
+    })
+
+
+
+    //delete api 
+
+    function removeitem(cat){
+        console.log(cat ,"delete this itemn")
+
+    }
+
+
+
+
     </script>
 </body>
 
