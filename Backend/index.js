@@ -1,16 +1,36 @@
 const express = require('express');
-const cors = require("cors")
+const app = express();
+let bodyParser = require('body-parser')
+
+app.use(bodyParser.urlencoded({extended:true}))
+
+const cors = require("cors");
 require("./db/config")
 
-const User = require('./db/user')
-const app = express();
-app.use(express.json())
+
+const Category = require('./db/category');
+const category = require('./db/category');
+
+app.use(express.json());
+
 app.use(cors());
 
-app.post('/register', async(req,res)=>{
-    let user = new User(req.body)
-    let result = await user.save()
+
+app.post('/add-category', async (req, res) => {
+
+    let category = new Category(req.body)
+    let result = await category.save()
     res.send(result)
+});
+
+
+//get api
+
+app.get('/list-category', async(req,res)=>{
+
+    let categorylist = await category.find()
+    res.send(categorylist)
+
 })
 
 
