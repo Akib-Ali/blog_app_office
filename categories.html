@@ -257,8 +257,8 @@
                                     aria-label="Close"></button>
                             </div>
 
-                             <!-- form start -->
-                              <form id="form" method="post">
+                            <!-- form start -->
+                            <!-- <form id="form" method="post">  -->
                             <div class="modal-body">
                                 <div class="row">
                                     <div class="col mb-3">
@@ -272,12 +272,17 @@
                                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                         Close
                                     </button>
-                                    <!-- <button type="button" class="btn btn-primary">Add Category</button> -->
-                                    <input type="submit" value="Add Category" class="btn btn-primary"/>
+                                    <button type="button" class="btn btn-primary" onclick="addCategory()">Add
+                                        Categoryies</button>
+                                    <!-- <input type="submit" value="Add Category" class="btn btn-primary"/> -->
+                                </div>
+                                <!-- gg -->
+                                <div class="w-100">
+                                    <span id="message" class="alert alert-success"></span>
                                 </div>
 
                             </div>
-                        </form>
+                            <!-- </form>  -->
                             <!-- end form -->
                         </div>
                     </div>
@@ -445,41 +450,66 @@
 
 
 
+
+
+        //post api iind method
+
+        async function addCategory() {
+            let payload = {}
+            payload['category'] = document.getElementById("category").value;
+            await fetch("http://localhost:5000/add-category", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            }).then((res) => res.json()).then((responce) => {
+                document.getElementById("message").innerHTML = responce.message
+                getdata()
+            })
+
+        }
+
+
+
+
+
+
         //post api
 
-    let form = document.getElementById('form')
-    form.addEventListener('submit',function(e){
-        e.preventDefault()
+        // let form = document.getElementById('form')
+        // form.addEventListener('submit',function(e){
+        //     e.preventDefault()
 
-        let category = document.getElementById('category').value
+        //     let category = document.getElementById('category').value
 
-        fetch("http://localhost:5000/add-category",{
-            method:'POST',
-            body:JSON.stringify({
-                category:category
-            }),
-            headers:{
-                "Content-Type":"appication/json; charset=UTF-8"
-            }
-        }).then(function(responce){
-        
-            return responce.json()
-            alert("ggg")
-        }).then(function(data){
-            console.log(data, "post data")
-            
-        })
-        
-    })
+        //     fetch("http://localhost:5000/add-category",{
+        //         method:'POST',
+        //         body:JSON.stringify({
+        //             category:category
+        //         }),
+        //         headers:{
+        //             "Content-Type":"appication/json; charset=UTF-8"
+        //         }
+        //     }).then(function(responce){
+
+        //         return responce.json()
+        //         alert("ggg")
+        //     }).then(function(data){
+        //         console.log(data, "post data")
+
+        //     })
+
+        // })
 
 
 
-    //delete api 
+        //delete api 
 
-    function removeitem(cat){
-        console.log(cat ,"delete this itemn")
+        function removeitem(cat) {
+            console.log(cat, "delete this itemn")
 
-    }
+        }
 
 
 
