@@ -296,7 +296,7 @@
                                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                         Cancel
                                     </button>
-                                    <button type="button" class="btn btn-primary">Edit Category</button>
+                                    <button type="button" class="btn btn-primary" type="button" onclick="editItem(this)" id="editItem_id">Edit Category</button>
                                 </div>
                             </div>
                         </div>
@@ -395,8 +395,11 @@
                 <td>${index+1} </td>
                 <td>${category.category}</td> 
                 <td>
-                <a href="" class="btn btn-primary btn-sm" data-bs-toggle="modal"
+                <a href="javascript:void(0)"
+                 class="btn btn-primary btn-sm" onclick="getEditId('${category._id}')"
+                 data-bs-toggle="modal"
                 data-bs-target="#modalEdit">Edit</a> &nbsp;
+
                  <a href="javascript:void(0)"
                class="btn btn-danger btn-sm" onclick="getItemId('${category._id}')" data-bs-toggle="modal"
              data-bs-target="#modalDelete">Delete item</a>
@@ -470,10 +473,12 @@
         //delete api 
         function getItemId(id) {
             document.querySelector("#item_id").setAttribute("data-id", id);
+            console.log(id,"delete button click")
         }
 
         function removeItem(e) {
             let itemId = e.dataset.id;
+            console.log(itemId, "when clicked fdelete button")
             let payload = {}
             var requestOptions = {
                 method: 'DELETE',
@@ -490,7 +495,17 @@
         }
 
 
+      //edit method
 
+      function getEditId(id){
+        document.querySelector("#editItem_id").setAttribute("data-id", id);
+        console.log(id,"received id edit buuton click")
+     }
+
+     function editItem(elem){
+        let editItemId = elem.dataset.id;
+        console.log(editItemId, "when click edit button")
+     }
 
 
     </script>
