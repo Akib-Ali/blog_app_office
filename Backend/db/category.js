@@ -1,8 +1,11 @@
 const mongoose = require("mongoose");
 
 const categorySchema = new mongoose.Schema({
-    category:String,
+    category: String,
+    createdAt: {
+        type: Date,
+        default: Date.now
+    }
+});
 
-})
-
-module.exports = mongoose.model("categorymanagers",categorySchema)
+module.exports = mongoose.model("categorymanagers", categorySchema);

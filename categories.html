@@ -209,37 +209,23 @@
                                     Add Category
                                 </button>
                             </div>
+                            <div class="table-responsive text-nowrap">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Sr.No.</th>
+                                            <th>Category Name</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody class="table-border-bottom-0" id="category-list">
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
 
                         <!-- card div end 2 content -->
-
-
-
-
-
-                        <div class="table-responsive text-nowrap">
-                            <table class="table table-striped">
-                                <thead>
-                                    <tr>
-                                        <th>Sr.No.</th>
-                                        <th>Category Name</th>
-                                        <th>Actions</th>
-                                    </tr>
-                                </thead>
-                                <tbody class="table-border-bottom-0" id="category-list">
-                                    <!-- <tr>
-                                            <td>1</td>
-                                            <td>Node JS</td>
-                                            <td>
-                                                <a href="" class="btn btn-primary btn-sm" data-bs-toggle="modal"
-                                                data-bs-target="#modalEdit">Edit</a> &nbsp; <a href=""
-                                                    class="btn btn-danger btn-sm" data-bs-toggle="modal"
-                                                    data-bs-target="#modalDelete">Delete</a>
-                                            </td>
-                                        </tr> -->
-                                </tbody>
-                            </table>
-                        </div>
                     </div>
                 </div>
 
@@ -264,7 +250,7 @@
                                     <div class="col mb-3">
                                         <label for="nameWithTitle" class="form-label">Category</label>
                                         <input type="text" id="category" class="form-control"
-                                            placeholder="Enter Categories" />
+                                            placeholder="Enter Categories" autocomplete="off"/>
                                     </div>
                                 </div>
 
@@ -276,11 +262,6 @@
                                         Categoryies</button>
                                     <!-- <input type="submit" value="Add Category" class="btn btn-primary"/> -->
                                 </div>
-                                <!-- gg -->
-                                <div class="w-100">
-                                    <span id="message" class="alert alert-success"></span>
-                                </div>
-
                             </div>
                             <!-- </form>  -->
                             <!-- end form -->
@@ -344,7 +325,8 @@
                                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                         Cancel
                                     </button>
-                                    <button type="button" class="btn btn-primary">Delete Blog</button>
+                                    <button type="button" onclick="removeItem(this)" id="item_id"
+                                        class="btn btn-primary">Delete Blog</button>
                                 </div>
                             </div>
                         </div>
@@ -353,20 +335,6 @@
 
 
                 <!--Delete Modal End -->
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                 <!-- Footer -->
                 <footer class="content-footer footer bg-footer-theme ">
                     <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
@@ -414,29 +382,24 @@
     <!-- Page JS -->
     <script src="../assets/js/dashboards-analytics.js"></script>
 
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
-
     <script>
 
         async function callapi() {
 
             let result = await fetch("http://localhost:5000/list-category")
             result = await result.json()
-            console.log(result, "my output")
             document.getElementById("category-list").innerHTML = result.map((category, index) =>
+
+
                 `<tr>
-                <td>${category._id} </td>
+                <td>${index+1} </td>
                 <td>${category.category}</td> 
                 <td>
                 <a href="" class="btn btn-primary btn-sm" data-bs-toggle="modal"
                 data-bs-target="#modalEdit">Edit</a> &nbsp;
-                 <a href=""
-               class="btn btn-danger btn-sm" data-bs-toggle="modal"
+                 <a href="javascript:void(0)"
+               class="btn btn-danger btn-sm" onclick="getItemId('${category._id}')" data-bs-toggle="modal"
              data-bs-target="#modalDelete">Delete item</a>
-             <button onclick='removeitem(${category._id})'> Dlete</button>
-
-             
             </td>
                 
             </tr>`
@@ -464,8 +427,8 @@
                 },
                 body: JSON.stringify(payload)
             }).then((res) => res.json()).then((responce) => {
-                document.getElementById("message").innerHTML = responce.message
-                getdata()
+                $("#category").val('');
+                callapi();
             })
 
         }
@@ -505,11 +468,27 @@
 
 
         //delete api 
-
-        function removeitem(cat) {
-            console.log(cat, "delete this itemn")
-
+        function getItemId(id) {
+            document.querySelector("#item_id").setAttribute("data-id", id);
         }
+
+        function removeItem(e) {
+            let itemId = e.dataset.id;
+            let payload = {}
+            var requestOptions = {
+                method: 'DELETE',
+                redirect: 'follow'
+            };
+
+            fetch("http://localhost:5000/delete/" + itemId, requestOptions)
+                .then(response => {
+                    // window.location.reload(true);
+                    $("#modalDelete").modal("hide");
+                    callapi();
+                })
+                .catch(error => console.log('error', error));
+        }
+
 
 
 
