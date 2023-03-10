@@ -196,7 +196,7 @@
                 
                 <div class="content-wrapper">
                     <!-- Content -->
-                    <!-- <form id="form" method="post"> -->
+                     <form id="form" method="post" enctype="multipart/form-data">
 
                     <div class="container-xxl flex-grow-1 container-p-y">
 
@@ -269,10 +269,10 @@
 
                                     <div class="card-body">
                                         <div>
-                                            <button class="btn btn-primary btn-sm me-4 col-md-12" onclick="addBlog()">Add Blog</button>
+                                            <!-- <button class="btn btn-primary btn-sm me-4 col-md-12" onclick="addBlog()">Add Blog</button> -->
                                             
-                                        <!-- <input type="submit"  value="Add Blog" class="btn btn-primary btn-sm me-4 col-md-12"/>
- -->
+                                         <input type="submit"  value="Add Blog" class="btn btn-primary btn-sm me-4 col-md-12"/>
+ 
                                         </div>
                                     </div>
 
@@ -283,7 +283,7 @@
                             </div>
                         </div>
 
-                    <!-- </form> -->
+                     </form> 
                     </div>
                 
                     <!-- / Content -->
@@ -327,69 +327,69 @@
     <script>
         //post api
 
-        // let form = document.getElementById("form")
-        // form.addEventListener("submit", async function(e){
-        //     e.preventDefault()
+        let form = document.getElementById("form")
+        form.addEventListener("submit", async function(e){
+            e.preventDefault()
 
-        //     //let image = document.getElementById("image").Value;
-        //     let title = document.getElementById('title').value;
-        //     let slug = document.getElementById("slug").value;
-        //     let category = document.getElementById("category").value;
-        //     let date = document.getElementById("date").value
+            let image = document.getElementById("image").value;
+            let title = document.getElementById('title').value;
+            let slug = document.getElementById("slug").value;
+            let category = document.getElementById("category").value;
+            let date = document.getElementById("date").value
 
 
-        //   await  fetch("http://localhost:5000/add-blog",{
-        //         method:'POST',
-        //         body:JSON.stringify({
-                    
-        //             title:title,
-        //             slug:slug,
-        //             category:category,
-        //             date: date
-        //         }),
-        //         headers:{
-        //              "Content-Type":"appication/json; charset=UTF-8"
-        //        }
-        //     })
-        //     .then(function(responce){
+          await  fetch("http://localhost:5000/add-blog",{
+                method:'POST',
+                body:JSON.stringify({
+                    image:image,
+                    title:title,
+                    slug:slug,
+                    category:category,
+                    date: date
+                }),
+                headers:{
+                     "Content-Type":"application/json; charset=UTF-8"
+               }
+            })
+            .then(function(responce){
 
-        //      return responce.json()
-        //     alert("ggg")
-        //     }).then(function(data){
-        //        console.log(data, "post data")
+           return responce.json()
+        
+           }).then(function(data){
+           console.log(data, "post data")
 
-        //  })
+           })
 
-        // })
+        })
 
 
 
 
         //post api another method
 
-        async function addBlog() {
-            let payload = {}
-            payload['image'] = document.getElementById("image").value;
-            payload['title'] = document.getElementById("title").value;
-            payload['slug'] = document.getElementById("slug").value;
-            payload['category'] = document.getElementById("category").value;
-            payload['date'] = document.getElementById("date").value;
-            await fetch("http://localhost:5000/add-blog", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify(payload)
-            }).then((res) => res.json()).then((responce) => {
-                $('#image').val('');
-                $("#title").val('');
-                $("#slug").val('');
-                $("#category").val('');
-                $("#date").val('');
-               // callapi();
-            })
+        // async function addBlog() {
+        //     let payload = {}
+        //     payload['image'] = document.getElementById("image").value;
+        //     payload['title'] = document.getElementById("title").value;
+        //     payload['slug'] = document.getElementById("slug").value;
+        //     payload['category'] = document.getElementById("category").value;
+        //     payload['date'] = document.getElementById("date").value;
+        //     await fetch("http://localhost:5000/add-blog", {
+        //         method: "POST",
+        //         headers: {
+        //             "Content-Type": "application/json"
+        //         },
+        //         body: JSON.stringify(payload)
+        //     }).then((res) => res.json()).then((responce) => {
+        //         $('#image').val('');
+        //         $("#title").val('');
+        //         $("#slug").val('');
+        //         $("#category").val('');
+        //         $("#date").val('');
+               
+        //     })
 
-        }
+        // }
 
 
 

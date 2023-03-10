@@ -109,13 +109,16 @@ app.get("/get-blog", async (req, res) => {
 //post api
 
 app.post("/add-blog", upload, async (req, res) => {
-    const { title, slug, category, date } = req.body;
-    // const newBlog = new Blog({
-    //     image: req.file.filename, title, slug, category, date,
-    //     createdAt: Date.now()
-    // });
+    const {title, slug, category, date } = req.body;
+    const newBlog = new Blog({
+        title, slug, category, date,
+        createdAt: Date.now()
+    });
+
+    if (req.file) {
+        newBlog.image = req.file.filename;
+    }
     
-    const newBlog = new Blog({title,slug,category,date,createdAt:Date.now()}) 
     let result = await newBlog.save()
     res.send(result)
 })

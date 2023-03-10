@@ -189,7 +189,7 @@
                         </ul>
                     </div>
                 </nav>
-                
+
 
                 <!-- / Navbar -->
 
@@ -202,35 +202,35 @@
                     <div class="container-xxl flex-grow-1 container-p-y">
 
 
-                         <div class="card">
-                       <div class="d-flex justify-content-between align-items-center">
-                         <h5 class="card-header">Recently Added Blog</h5>
+                        <div class="card">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <h5 class="card-header">Recently Added Blog</h5>
                                 <a href="add-blog.html" class="menu-link">
-                                     <button type="button" class="btn btn-primary btn-sm me-4">
-                                    Add Blog
-                                </button>
-                              </a>
-                         </div>
+                                    <button type="button" class="btn btn-primary btn-sm me-4">
+                                        Add Blog
+                                    </button>
+                                </a>
+                            </div>
                         </div>
 
                         <!-- card div end 2 content -->
 
 
-                            <div class="table-responsive text-nowrap">
-                                <table class="table table-striped">
-                                    <thead>
-                                        <tr>
-                                            <th>Sr.No.</th>
-                                            <th>Image</th>
-                                            <th>Title</th>
-                                            <th>SLUG</th>
-                                            <th>Category</th>
-                                            <th>Date</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody class="table-border-bottom-0" id="blogList"> 
-                                        <!-- <tr>
+                        <div class="table-responsive text-nowrap">
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sr.No.</th>
+                                        <th>Image</th>
+                                        <th>Title</th>
+                                        <th>SLUG</th>
+                                        <th>Category</th>
+                                        <th>Date</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="table-border-bottom-0" id="blogList">
+                                    <!-- <tr>
                                             <td>1</td>
                                             <td><img src="https://png.pngtree.com/png-clipart/20190705/original/pngtree-cartoon-character-sticker-red-cap-girl-png-image_4355351.jpg" height="50px" width="50px"/></td>
                                             <td>Node Js</td>
@@ -243,101 +243,94 @@
                                                     data-bs-target="#modalDelete">Delete</a>
                                             </td>
                                         </tr> -->
-                                    </tbody>
-                                </table>
-                            </div>
-
-
-                       
-                    <!-- / Content -->
+                                </tbody>
+                            </table>
+                        </div>
 
 
 
-                    <!--Delete Modal -->
+                        <!-- / Content -->
 
 
-                     <div class="modal fade" id="modalDelete" tabindex="-1" aria-hidden="true">
-                        <div class="modal-dialog modal-dialog-centered" role="document">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="modalCenterTitle">Delete Blog</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                        aria-label="Close"></button>
-                                </div>
-                                <div class="modal-body">
-                                    <div class="row">
-                                        <div class="col mb-3">
-                                            <p>Are You Sure To Delete This Blog</p>
+
+                        <!--Delete Modal -->
+
+
+                        <div class="modal fade" id="modalDelete" tabindex="-1" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="modalCenterTitle">Delete Blog</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                            aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <div class="row">
+                                            <div class="col mb-3">
+                                                <p>Are You Sure To Delete This Blog</p>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-outline-secondary"
+                                                data-bs-dismiss="modal">
+                                                Cancel
+                                            </button>
+                                            <button type="button" class="btn btn-primary" id="blog_id"
+                                                onclick="removeBlog(this)">Delete Blog</button>
                                         </div>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
-                                            Cancel
-                                        </button>
-                                        <button type="button" class="btn btn-primary" id="blog_id" onclick="removeBlog(this)">Delete Blog</button>
-                                    </div>
                                 </div>
                             </div>
                         </div>
+
                     </div>
-                
-             </div> 
-              <!--Delete Modal End -->
-
-        
+                    <!--Delete Modal End -->
 
 
-
-
-
-
-
-
-
-
-                <!-- Footer -->
-                <footer class="content-footer footer bg-footer-theme">
-                    <div class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
-                        <div class="mb-2 mb-md-0">
-                            ©
-                            <script>
-                                document.write(new Date().getFullYear());
-                            </script>
-                            , made with ❤️ by
-                            <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">Akib
-                                Ali</a>
+            <!-- Footer -->
+                    <footer class="content-footer footer bg-footer-theme">
+                        <div
+                            class="container-xxl d-flex flex-wrap justify-content-between py-2 flex-md-row flex-column">
+                            <div class="mb-2 mb-md-0">
+                                ©
+                                <script>
+                                    document.write(new Date().getFullYear());
+                                </script>
+                                , made with ❤️ by
+                                <a href="https://themeselection.com" target="_blank" class="footer-link fw-bolder">Akib
+                                    Ali</a>
+                            </div>
                         </div>
-                    </div>
-                </footer>
-                <!-- / Footer -->
+                    </footer>
+                    <!-- / Footer -->
 
 
-                <div class="content-backdrop fade"></div>
+                    <div class="content-backdrop fade"></div>
+                </div>
+                <!-- Content wrapper -->
             </div>
-            <!-- Content wrapper -->
+            <!-- / Layout page -->
+
+
+            <!-- Overlay -->
+            <div class="layout-overlay layout-menu-toggle"></div>
         </div>
-        <!-- / Layout page -->
-    
 
-    <!-- Overlay -->
-    <div class="layout-overlay layout-menu-toggle"></div>
-    </div>
-    
-    <!-- / Layout wrapper -->
+        <!-- / Layout wrapper -->
 
-    <!-- Core JS -->
-    <!-- build:js assets/vendor/js/core.js -->
+        <!-- Core JS -->
+        <!-- build:js assets/vendor/js/core.js -->
 
-    <script>
-        //get blog api
+        <script>
+            //get blog api
 
-        async function getBlogApi(){
-            let result = await fetch("http://localhost:5000/get-blog")
-            result =await result.json()
-            console.log(result, "receiver blog api data")
-            document.getElementById("blogList").innerHTML = result.map((blog,index)=>
-            ` <tr>
-                <td>${index+1}</td>
+            async function getBlogApi() {
+                let result = await fetch("http://localhost:5000/get-blog")
+                result = await result.json()
+                console.log(result, "receiver blog api data")
+                document.getElementById("blogList").innerHTML = result.map((blog, index) =>
+                    ` <tr>
+                <td>${index + 1}</td>
                 <td><img src="./Backend/uploads/${blog.image}" alt"image link" height="50px" width="50px" style="object-fit: contain;"/></td>
                 <td>${blog.title}</td>
                 <td>${blog.slug}</td>
@@ -350,72 +343,72 @@
                  data-bs-target="#modalDelete" onclick="getBlogId('${blog._id}')">Delete</a>
                  </td>
                     </tr>`
-            ).join("")
+                ).join("")
 
-        }
-        
-        getBlogApi()
+            }
 
-
-        //get item id
-
-        function getBlogId(id){
-           // alert(id, "getr deleted id")
-            document.querySelector("#blog_id").setAttribute("data-id", id)
-           console.log(id, "delete when button click")
-            
+            getBlogApi()
 
 
-        }
+            //get item id
+
+            function getBlogId(id) {
+                // alert(id, "getr deleted id")
+                document.querySelector("#blog_id").setAttribute("data-id", id)
+                console.log(id, "delete when button click")
 
 
-        function removeBlog(e){
-            let itemId = e.dataset.id
-            console.log("receive successfuly id", itemId)
-            let payload = {}
-            var requestOptions = {
-                method: 'DELETE',
-                redirect: 'follow'
-            };
-            fetch("http://localhost:5000/delete-blog/" + itemId, requestOptions)
-                .then(response => {
-                    
-                    $("#modalDelete").modal("hide");
-                    getBlogApi()
-                
-                })
-                .catch(error => console.log('error', error));
-        }
 
-        
-    
-    </script>
+            }
 
 
+            function removeBlog(e) {
+                let itemId = e.dataset.id
+                console.log("receive successfuly id", itemId)
+                let payload = {}
+                var requestOptions = {
+                    method: 'DELETE',
+                    redirect: 'follow'
+                };
+                fetch("http://localhost:5000/delete-blog/" + itemId, requestOptions)
+                    .then(response => {
+
+                        $("#modalDelete").modal("hide");
+                        getBlogApi()
+
+                    })
+                    .catch(error => console.log('error', error));
+            }
+
+
+
+        </script>
 
 
 
 
 
-    <script src="../assets/vendor/libs/jquery/jquery.js"></script>
-    <script src="../assets/vendor/libs/popper/popper.js"></script>
-    <script src="../assets/vendor/js/bootstrap.js"></script>
-    <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <script src="../assets/vendor/js/menu.js"></script>
-    <!-- endbuild -->
 
-    <!-- Vendors JS -->
-    <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
+        <script src="../assets/vendor/libs/jquery/jquery.js"></script>
+        <script src="../assets/vendor/libs/popper/popper.js"></script>
+        <script src="../assets/vendor/js/bootstrap.js"></script>
+        <script src="../assets/vendor/libs/perfect-scrollbar/perfect-scrollbar.js"></script>
 
-    <!-- Main JS -->
-    <script src="../assets/js/main.js"></script>
+        <script src="../assets/vendor/js/menu.js"></script>
+        <!-- endbuild -->
 
-    <!-- Page JS -->
-    <script src="../assets/js/dashboards-analytics.js"></script>
+        <!-- Vendors JS -->
+        <script src="../assets/vendor/libs/apex-charts/apexcharts.js"></script>
 
-    <!-- Place this tag in your head or just before your close body tag. -->
-    <script async defer src="https://buttons.github.io/buttons.js"></script>
+        <!-- Main JS -->
+        <script src="../assets/js/main.js"></script>
+
+        <!-- Page JS -->
+        <script src="../assets/js/dashboards-analytics.js"></script>
+
+        <!-- Place this tag in your head or just before your close body tag. -->
+        <script async defer src="https://buttons.github.io/buttons.js"></script>
 </body>
 
 </html>
