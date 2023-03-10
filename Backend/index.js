@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 let bodyParser = require('body-parser')
 require('dotenv').config()
-const multer= require('multer')
+const multer = require('multer')
 const path = require('path')
 
 app.use(bodyParser.urlencoded({ extended: true }))
@@ -80,7 +80,7 @@ app.delete("/delete/:_id", async (req, res) => {
 
 //edit api
 
-app.put("/update-category/:_id",async(req,res)=>{
+app.put("/update-category/:_id", async (req, res) => {
 
     //console.log(req.params ,"edit item")
     let data = await Category.updateOne(
@@ -88,7 +88,7 @@ app.put("/update-category/:_id",async(req,res)=>{
         {
             $set: req.body
         }
-        );
+    );
     res.send(data)
 })
 
@@ -100,7 +100,7 @@ app.put("/update-category/:_id",async(req,res)=>{
 
 //get api
 
-app.get("/get-blog" , async(req,res)=>{
+app.get("/get-blog", async (req, res) => {
 
     let bloglist = await Blog.find()
     res.send(bloglist)
@@ -108,11 +108,25 @@ app.get("/get-blog" , async(req,res)=>{
 
 //post api
 
-app.post("/add-blog",upload, async(req,res)=>{
-    const {title,slug,category,date}= req.body;
-    const newBlog = new Blog ({ image: req.file.filename, title, slug, category,date,
-    createdAt: Date.now() });
+app.post("/add-blog", upload, async (req, res) => {
+    const { title, slug, category, date } = req.body;
+    // const newBlog = new Blog({
+    //     image: req.file.filename, title, slug, category, date,
+    //     createdAt: Date.now()
+    // });
+    
+    const newBlog = new Blog({title,slug,category,date,createdAt:Date.now()}) 
     let result = await newBlog.save()
     res.send(result)
 })
+
+//delete api
+
+app.delete("/delete-blog/:_id", async (req, res) => {
+
+    let bloglist = await Blog.deleteOne(req.params)
+    res.send(bloglist)
+
+})
+
 app.listen(5000);

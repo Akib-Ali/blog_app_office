@@ -193,8 +193,10 @@
                 <!-- / Navbar -->
 
                 <!-- Content wrapper -->
+                
                 <div class="content-wrapper">
                     <!-- Content -->
+                    <!-- <form id="form" method="post"> -->
 
                     <div class="container-xxl flex-grow-1 container-p-y">
 
@@ -207,14 +209,14 @@
                                         <div class="row">
                                             <div class="col-md-6">
                                             <label for="defaultFormControlInput" class="form-label">Image</label>
-                                            <input type="text" class="form-control" id="defaultFormControlInput"
+                                            <input type="file" class="form-control" name="image" id="image"
                                                 placeholder="Enter Image Url"
                                                 aria-describedby="defaultFormControlHelp" />
                                          </div>
 
                                          <div class="col-md-6">
                                             <label for="defaultFormControlInput" class="form-label">Title</label>
-                                            <input type="text" class="form-control" id="defaultFormControlInput"
+                                            <input type="text" class="form-control" name="title" id="title"
                                                 placeholder="Enter Title" aria-describedby="defaultFormControlHelp" />
 
                                          </div>
@@ -228,15 +230,18 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                         <label for="defaultFormControlInput" class="form-label">Slug</label>
-                                        <input type="text" class="form-control" id="defaultFormControlInput"
+                                        <input type="text" class="form-control" id="slug"
                                             placeholder="Enter Slug"
+                                            name="slug"
                                             aria-describedby="defaultFormControlHelp" />
                                      </div>
 
                                      <div class="col-md-6">
                                         <label for="defaultFormControlInput" class="form-label">Category</label>
-                                        <input type="text" class="form-control" id="defaultFormControlInput"
-                                            placeholder="Enter Category" aria-describedby="defaultFormControlHelp" />
+                                        <input type="text" class="form-control" id="category"
+                                            placeholder="Enter Category" 
+                                            name="category"
+                                            aria-describedby="defaultFormControlHelp" />
 
                                      </div>
                                     </div>
@@ -248,8 +253,9 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                         <label for="defaultFormControlInput" class="form-label">Date</label>
-                                        <input type="date" class="form-control" id="defaultFormControlInput"
-                                            placeholder="Enter Image Url"
+                                        <input type="date" class="form-control" id="date"
+                                            placeholder="Enter Date"
+                                            name="date"
                                             aria-describedby="defaultFormControlHelp" />
                                      </div>
 
@@ -263,9 +269,10 @@
 
                                     <div class="card-body">
                                         <div>
-                                           <button class="btn btn-primary btn-sm me-4 col-md-12">Add Blog</button>
-                                           
-
+                                            <button class="btn btn-primary btn-sm me-4 col-md-12" onclick="addBlog()">Add Blog</button>
+                                            
+                                        <!-- <input type="submit"  value="Add Blog" class="btn btn-primary btn-sm me-4 col-md-12"/>
+ -->
                                         </div>
                                     </div>
 
@@ -275,7 +282,10 @@
                                 </div>
                             </div>
                         </div>
+
+                    <!-- </form> -->
                     </div>
+                
                     <!-- / Content -->
 
                     <!-- Footer -->
@@ -309,6 +319,92 @@
 
     <!-- Core JS -->
     <!-- build:js assets/vendor/js/core.js -->
+
+
+
+    
+
+    <script>
+        //post api
+
+        // let form = document.getElementById("form")
+        // form.addEventListener("submit", async function(e){
+        //     e.preventDefault()
+
+        //     //let image = document.getElementById("image").Value;
+        //     let title = document.getElementById('title').value;
+        //     let slug = document.getElementById("slug").value;
+        //     let category = document.getElementById("category").value;
+        //     let date = document.getElementById("date").value
+
+
+        //   await  fetch("http://localhost:5000/add-blog",{
+        //         method:'POST',
+        //         body:JSON.stringify({
+                    
+        //             title:title,
+        //             slug:slug,
+        //             category:category,
+        //             date: date
+        //         }),
+        //         headers:{
+        //              "Content-Type":"appication/json; charset=UTF-8"
+        //        }
+        //     })
+        //     .then(function(responce){
+
+        //      return responce.json()
+        //     alert("ggg")
+        //     }).then(function(data){
+        //        console.log(data, "post data")
+
+        //  })
+
+        // })
+
+
+
+
+        //post api another method
+
+        async function addBlog() {
+            let payload = {}
+            payload['image'] = document.getElementById("image").value;
+            payload['title'] = document.getElementById("title").value;
+            payload['slug'] = document.getElementById("slug").value;
+            payload['category'] = document.getElementById("category").value;
+            payload['date'] = document.getElementById("date").value;
+            await fetch("http://localhost:5000/add-blog", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            }).then((res) => res.json()).then((responce) => {
+                $('#image').val('');
+                $("#title").val('');
+                $("#slug").val('');
+                $("#category").val('');
+                $("#date").val('');
+               // callapi();
+            })
+
+        }
+
+
+
+
+        
+
+    </script>
+
+
+
+
+
+
+
+
     <script src="../assets/vendor/libs/jquery/jquery.js"></script>
     <script src="../assets/vendor/libs/popper/popper.js"></script>
     <script src="../assets/vendor/js/bootstrap.js"></script>
