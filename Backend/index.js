@@ -78,19 +78,37 @@ app.delete("/delete/:_id", async (req, res) => {
     res.send(categorylist)
 })
 
+//get one item api
+
+app.get("/list-category/:id", async(req,res)=>{
+
+    let categorylist = await category.findOne({_id: req.params.id})
+    if(categorylist){
+        res.send(categorylist)
+
+    }else{
+        res.send({"categorylist":"NO Record found"})
+    }
+
+})
+
+
+
+
 //edit api
 
-app.put("/update-category/:_id", async (req, res) => {
+app.post("/update-category/:_id", async (req, res) => {
 
-    //console.log(req.params ,"edit item")
-    let data = await Category.updateOne(
-        req.params,
-        {
-            $set: req.body
-        }
-    );
-    res.send(data)
-})
+    console.log(req.params ,"edit item")
+         let data = await Category.updateOne(
+       req.params,         {
+             $set: req.body
+         }
+   );    
+   res.send(data)
+
+    
+ })
 
 
 

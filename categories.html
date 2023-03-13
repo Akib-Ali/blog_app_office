@@ -250,7 +250,7 @@
                                     <div class="col mb-3">
                                         <label for="nameWithTitle" class="form-label">Category</label>
                                         <input type="text" id="category" class="form-control"
-                                            placeholder="Enter Categories" autocomplete="off"/>
+                                            placeholder="Enter Categories" autocomplete="off" />
                                     </div>
                                 </div>
 
@@ -288,7 +288,7 @@
                                 <div class="row">
                                     <div class="col mb-3">
                                         <label for="nameWithTitle" class="form-label">Category</label>
-                                        <input type="text" id="nameWithTitle" class="form-control"
+                                        <input type="text" id="editCategory" class="form-control"
                                             placeholder="Enter Categories" />
                                     </div>
                                 </div>
@@ -296,7 +296,9 @@
                                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
                                         Cancel
                                     </button>
-                                    <button type="button" class="btn btn-primary" type="button" onclick="editItem(this)" id="editItem_id">Edit Category</button>
+                                    <button type="button" class="btn btn-primary" type="button"
+                                        onclick="updateSelectedCategory(this)" id="selected_item_id">Edit
+                                        Category</button>
                                 </div>
                             </div>
                         </div>
@@ -392,12 +394,12 @@
 
 
                 `<tr>
-                <td>${index+1} </td>
+                <td>${index + 1} </td>
                 <td>${category.category}</td> 
                 <td>
                 <a href="javascript:void(0)"
                  class="btn btn-primary btn-sm" onclick="getEditId('${category._id}')"
-                 data-bs-toggle="modal"
+                 data-bs-toggle="modal(hide)"
                 data-bs-target="#modalEdit">Edit</a> &nbsp;
 
                  <a href="javascript:void(0)"
@@ -473,7 +475,7 @@
         //delete api 
         function getItemId(id) {
             document.querySelector("#item_id").setAttribute("data-id", id);
-            console.log(id,"delete button click")
+            console.log(id, "delete button click")
         }
 
         function removeItem(e) {
@@ -495,17 +497,70 @@
         }
 
 
-      //edit method
+        //edit method
 
-      function getEditId(id){
-        document.querySelector("#editItem_id").setAttribute("data-id", id);
-        console.log(id,"received id edit buuton click")
-     }
+        function getEditId(id) {
+            document.querySelector("#selected_item_id").setAttribute("data-id", id)
+            getSelectedCategory(id)
+        }
 
-     function editItem(elem){
-        let editItemId = elem.dataset.id;
-        console.log(editItemId, "when click edit button")
-     }
+        async function getSelectedCategory(id) {
+            let payload = {}
+            var requestOptions = {
+                method: 'GET',
+                redirect: 'follow'
+            };
+
+            let output = await fetch("http://localhost:5000/list-category/" + id, requestOptions)
+            output = await output.json()
+            $("#editCategory").val(output.category);
+            $("#modalEdit").modal("show");
+
+        }
+
+        //update api
+
+        // async function updateSelectedCategory(e){
+        //     let itemId = e.dataset.id;
+        //     console.log(itemId, "successful update selected category button")
+        //     let payload ={}
+        //     payload['category']= document.getElementById('editCategory').value;
+
+        //     await fetch('http://localhost:5000/list-category/' + itemId,{
+
+        //         method:"POST",
+        //         headers:{
+        //             "Content-Type":"application/json"
+
+        //         },
+        //         body:JSON.stringify(payload)
+        //     }).then((res)=> res.json()).then((responce)=>{
+        //         $("#editCategory").val("")
+        //     })
+        // }
+
+        async function updateSelectedCategory(e) {
+            let itemId = e.dataset.id;
+            let payload = {}
+            payload['category'] = document.getElementById('editCategory').value;
+
+            try {
+                const response = await fetch('http://localhost:5000/update-category/' + itemId, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await response.json();
+
+                $("#editCategory").val("");
+                callapi()
+            } catch (error) {
+                console.log(error);
+            }
+        }
 
 
     </script>
