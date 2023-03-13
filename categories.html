@@ -250,7 +250,7 @@
                                     <div class="col mb-3">
                                         <label for="nameWithTitle" class="form-label">Category</label>
                                         <input type="text" id="category" class="form-control"
-                                            placeholder="Enter Categories" autocomplete="off" />
+                                            placeholder="Enter Categories" autocomplete="off" required />
                                     </div>
                                 </div>
 
@@ -425,7 +425,8 @@
         async function addCategory() {
             let payload = {}
             payload['category'] = document.getElementById("category").value;
-            await fetch("http://localhost:5000/add-category", {
+            
+               await fetch("http://localhost:5000/add-category", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
@@ -435,8 +436,8 @@
                 $("#category").val('');
                 callapi();
             })
-
         }
+        
 
 
 
@@ -520,24 +521,6 @@
 
         //update api
 
-        // async function updateSelectedCategory(e){
-        //     let itemId = e.dataset.id;
-        //     console.log(itemId, "successful update selected category button")
-        //     let payload ={}
-        //     payload['category']= document.getElementById('editCategory').value;
-
-        //     await fetch('http://localhost:5000/list-category/' + itemId,{
-
-        //         method:"POST",
-        //         headers:{
-        //             "Content-Type":"application/json"
-
-        //         },
-        //         body:JSON.stringify(payload)
-        //     }).then((res)=> res.json()).then((responce)=>{
-        //         $("#editCategory").val("")
-        //     })
-        // }
 
         async function updateSelectedCategory(e) {
             let itemId = e.dataset.id;
@@ -556,6 +539,7 @@
                 const data = await response.json();
 
                 $("#editCategory").val("");
+                $("#modalEdit").modal("hide");
                 callapi()
             } catch (error) {
                 console.log(error);

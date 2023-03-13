@@ -55,13 +55,22 @@ function checkFileType(file, cb) {
 
 //post api
 
+// app.post('/add-category', async (req, res) => {
+//     const { category } = req.body;
+//     const newCategory = new Category({ category, createdAt: Date.now() });
+//     const result = await newCategory.save();
+//     res.send(result);
+// });
+
 app.post('/add-category', async (req, res) => {
     const { category } = req.body;
+    if (!category) {
+        return res.status(422).send({ message: "Please fill category." });
+    }
     const newCategory = new Category({ category, createdAt: Date.now() });
     const result = await newCategory.save();
     res.send(result);
 });
-
 
 //get api
 
@@ -116,29 +125,53 @@ app.post("/update-category/:_id", async (req, res) => {
 
 //blog api start
 
+
+
+//post api
+
+// app.post("/add-blog", upload, async (req, res) => {
+//     const {title, slug, category, date } = req.body;
+//     const newBlog = new Blog({
+//         title, slug, category, date, createdAt: Date.now()
+//     });
+
+//     if (req.file) {
+//         newBlog.image = req.file.filename;
+//     }
+    
+//     let result = await newBlog.save()
+//     res.send(result)
+// })
+
+app.post("/add-blog", upload, async (req, res) => {
+    try {
+      const { title, slug, category, date } = req.body;
+      const newBlog = new Blog({
+        title,
+        slug,
+        category,
+        date,
+        createdAt: Date.now(),
+      });
+  
+      if (req.file) {
+        newBlog.image = req.file.filename;
+      }
+  
+      let result = await newBlog.save();
+      res.send(result);
+    } catch (error) {
+      console.error(error);
+      res.status(500).send("An error occurred while saving the blog post.");
+    }
+  });
+
 //get api
 
 app.get("/get-blog", async (req, res) => {
 
-    let bloglist = await Blog.find()
+    let bloglist = await Blog.find().sort({createdAt: -1})
     res.send(bloglist)
-})
-
-//post api
-
-app.post("/add-blog", upload, async (req, res) => {
-    const {title, slug, category, date } = req.body;
-    const newBlog = new Blog({
-        title, slug, category, date,
-        createdAt: Date.now()
-    });
-
-    if (req.file) {
-        newBlog.image = req.file.filename;
-    }
-    
-    let result = await newBlog.save()
-    res.send(result)
 })
 
 //delete api

@@ -352,6 +352,13 @@
                }
             })
             .then(function(responce){
+                $("#image").val('')
+                $("#title").val('')
+                $("#slug").val('')
+                $("#category").val('')
+                $("#date").val('')
+                
+
 
            return responce.json()
         
@@ -365,32 +372,7 @@
 
 
 
-        //post api another method
-
-        // async function addBlog() {
-        //     let payload = {}
-        //     payload['image'] = document.getElementById("image").value;
-        //     payload['title'] = document.getElementById("title").value;
-        //     payload['slug'] = document.getElementById("slug").value;
-        //     payload['category'] = document.getElementById("category").value;
-        //     payload['date'] = document.getElementById("date").value;
-        //     await fetch("http://localhost:5000/add-blog", {
-        //         method: "POST",
-        //         headers: {
-        //             "Content-Type": "application/json"
-        //         },
-        //         body: JSON.stringify(payload)
-        //     }).then((res) => res.json()).then((responce) => {
-        //         $('#image').val('');
-        //         $("#title").val('');
-        //         $("#slug").val('');
-        //         $("#category").val('');
-        //         $("#date").val('');
-               
-        //     })
-
-        // }
-
+       
 
 
 
